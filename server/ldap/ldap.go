@@ -1,9 +1,9 @@
 package ldap
 
 import (
-	cfg "../../cfg"
-	log "../../log"
-	model "../../model"
+	cfg "github.com/kernel164/go389/cfg"
+	log "github.com/kernel164/go389/log"
+	model "github.com/kernel164/go389/model"
 	"github.com/nmcclain/ldap"
 )
 

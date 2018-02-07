@@ -1,8 +1,8 @@
 package pam
 
 import (
-	cfg "../../cfg"
-	model "../../model"
+	cfg "github.com/kernel164/go389/cfg"
+	model "github.com/kernel164/go389/model"
 )
 
 type PamAuthHandler struct {

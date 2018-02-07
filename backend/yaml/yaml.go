@@ -3,10 +3,10 @@
 package yaml
 
 import (
-	auth "../../auth"
-	cfg "../../cfg"
-	log "../../log"
-	model "../../model"
+	auth "github.com/kernel164/go389/auth"
+	cfg "github.com/kernel164/go389/cfg"
+	log "github.com/kernel164/go389/log"
+	model "github.com/kernel164/go389/model"
 	"fmt"
 	"github.com/nmcclain/ldap"
 	"gopkg.in/yaml.v1"

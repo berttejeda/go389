@@ -1,12 +1,11 @@
 package main
 
 import (
-	cmd "./cmd"
-	model "./model"
+	cmd "github.com/kernel164/go389/cmd"
+	model "github.com/kernel164/go389/model"
 	"gopkg.in/codegangsta/cli.v1"
 	"os"
 )
-
 func main() {
 	app := cli.NewApp()
 	app.Name = model.ProgramName

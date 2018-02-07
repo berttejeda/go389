@@ -1,9 +1,9 @@
 package auth
 
 import (
-	cfg "../cfg"
-	model "../model"
-	pam "./pam"
+	cfg "github.com/kernel164/go389/cfg"
+	model "github.com/kernel164/go389/model"
+	pam "github.com/kernel164/go389/auth/pam"
 	"crypto/sha256"
 	"encoding/hex"
 	"errors"

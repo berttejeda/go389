@@ -1,10 +1,10 @@
 package backend
 
 import (
-	cfg "../cfg"
-	model "../model"
-	proxy "./proxy"
-	yaml "./yaml"
+	cfg "github.com/kernel164/go389/cfg"
+	model "github.com/kernel164/go389/model"
+	proxy "github.com/kernel164/go389/backend/proxy"
+	yaml "github.com/kernel164/go389/backend/yaml"
 	"errors"
 )
 

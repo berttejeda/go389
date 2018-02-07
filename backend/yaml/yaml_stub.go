@@ -3,7 +3,7 @@
 package yaml
 
 import (
-	model "../../model"
+	model "github.com/kernel164/go389/model"
 	"errors"
 )
 

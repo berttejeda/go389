@@ -3,7 +3,7 @@
 package ini
 
 import (
-	model "../../model"
+	model "github.com/kernel164/go389/model"
 	"errors"
 )
 

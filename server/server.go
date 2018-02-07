@@ -1,9 +1,9 @@
 package server
 
 import (
-	cfg "../cfg"
-	model "../model"
-	ldap "./ldap"
+	cfg "github.com/kernel164/go389/cfg"
+	model "github.com/kernel164/go389/model"
+	ldap "github.com/kernel164/go389/server/ldap"
 	"errors"
 )
 

@@ -1,8 +1,8 @@
 package proxy
 
 import (
-	cfg "../../cfg"
-	model "../../model"
+	cfg "github.com/kernel164/go389/cfg"
+	model "github.com/kernel164/go389/model"
 	"crypto/sha256"
 	"fmt"
 	"github.com/nmcclain/ldap"

@@ -1,9 +1,9 @@
 package cfg
 
 import (
-	model "../model"
-	ini "./ini"
-	yaml "./yaml"
+	model "github.com/kernel164/go389/model"
+	ini "github.com/kernel164/go389/cfg/ini"
+	yaml "github.com/kernel164/go389/cfg/yaml"
 	"errors"
 )
 

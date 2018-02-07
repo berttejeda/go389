@@ -1,7 +1,7 @@
 package log
 
 import (
-	model "../model"
+	model "github.com/kernel164/go389/model"
 	"log"
 	//log "gopkg.in/inconshreveable/log15.v2"
 )
