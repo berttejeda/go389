@@ -2,6 +2,7 @@ package auth
 
 import (
 	cfg "github.com/kernel164/go389/cfg"
+	log "github.com/kernel164/go389/log"
 	model "github.com/kernel164/go389/model"
 	pam "github.com/kernel164/go389/auth/pam"
 	"crypto/sha256"
@@ -12,6 +13,7 @@ import (
 func GetAuthHandler(name string) (model.AuthHandler, error) {
 	switch cfg.GetAuthType(name) {
 	case "pam":
+		log.Info("Authenticating using PAM")
 		return pam.NewPamAuthHandler(name)
 	}
 	return NewDefaultAuthHandler(name)

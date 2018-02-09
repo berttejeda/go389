@@ -29,7 +29,7 @@ func runServer(c *cli.Context) error {
 		return err
 	}
 
-	//log.Info("Loading config", "file", config, "type", extn)
+	log.Info("Loading config", "file", config, "type", extn)
 
 	// load config
 	if err := cfg.Load(extn, config); err != nil {

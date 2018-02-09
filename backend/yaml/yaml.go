@@ -19,6 +19,7 @@ type YUser struct {
 	Name        string
 	UnixId      int      `yaml:"uid"`
 	GroupId     int      `yaml:"gid"`
+	accountStatus     string      `yaml:"accountStatus"`
 	OtherGroups []int    `yaml:"other_groups"`
 	Auths       []string `yaml:"auths"`
 	SshKeys     []string `yaml:"ssh_keys"`
@@ -62,12 +63,13 @@ func NewYamlBackendHandler(name string) (model.BackendHandler, error) {
 
 func (h YamlBackendHandler) Bind(bindDN, bindSimplePw string, conn net.Conn) (resultCode ldap.LDAPResultCode, err error) {
 	bindDN = strings.ToLower(bindDN)
-	log.Info("Bind Request", "BindDN", bindDN, "BaseDN", h.cfg.BaseDN, "Remote", conn.RemoteAddr().String())
+	log.Info("Our BaseDN is", h.cfg.BaseDN)
+	log.Info("Incoming Bind Request", "BindDN", bindDN, "BaseDN", h.cfg.BaseDN, "Remote", conn.RemoteAddr().String())
 	//stats_frontend.Add("bind_reqs", 1)
 
 	// parse the bindDN
 	if !strings.HasSuffix(bindDN, h.cfg.BaseDN) {
-		log.Warn(fmt.Sprintf("Bind Error: BindDN %s not our BaseDN %s", bindDN, h.cfg.BaseDN))
+		log.Warn(fmt.Sprintf("Bind Error: BindDN %s does not include our BaseDN %s", bindDN, h.cfg.BaseDN))
 		return ldap.LDAPResultInvalidCredentials, nil
 	}
 	parts := strings.Split(strings.TrimSuffix(bindDN, ","+h.cfg.BaseDN), ",")
@@ -98,12 +100,15 @@ func (h YamlBackendHandler) Bind(bindDN, bindSimplePw string, conn net.Conn) (re
 	// find the group
 	group := YGroup{}
 	found = false
+	log.Info("Let's parse the following groups", h.db.Groups)
 	for _, g := range h.db.Groups {
+		log.Info("Processing", g)
 		if g.Name == groupName {
 			found = true
 			group = g
 		}
 	}
+	log.Info("Matched the following group name", group)
 	if !found {
 		log.Warn(fmt.Sprintf("Bind Error: Group %s not found.", group))
 		return ldap.LDAPResultInvalidCredentials, nil
@@ -183,7 +188,7 @@ func (h YamlBackendHandler) Search(bindDN string, searchReq ldap.SearchRequest, 
 			attrs = append(attrs, &ldap.EntryAttribute{"uid", []string{u.Name}})
 			attrs = append(attrs, &ldap.EntryAttribute{"ou", []string{h.getGroupName(u.GroupId)}})
 			attrs = append(attrs, &ldap.EntryAttribute{"uidNumber", []string{fmt.Sprintf("%d", u.UnixId)}})
-			attrs = append(attrs, &ldap.EntryAttribute{"accountStatus", []string{"active"}})
+			attrs = append(attrs, &ldap.EntryAttribute{"accountStatus", []string{u.accountStatus}})
 			attrs = append(attrs, &ldap.EntryAttribute{"objectClass", []string{"posixAccount"}})
 			attrs = append(attrs, &ldap.EntryAttribute{"homeDirectory", []string{"/home/" + u.Name}})
 			attrs = append(attrs, &ldap.EntryAttribute{"loginShell", []string{"/bin/bash"}})

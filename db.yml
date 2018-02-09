@@ -4,16 +4,35 @@ groups:
     uid:  9001
   - name: admin
     uid:  9002
+  - name: tommy
+    uid:  1001
+  - name: notauser
+    uid:  1002
 
 users:
-  - name: suser1
-    uid: 9001
-    gid: 9001
+  - name: vagrant
+    uid: 9002
+    gid: 9002
     auths:
-      - "sha256:06004fd4f328fab028833d5156da66649be95afd61d41b690de33c1e3e3941a6" # suser1
+      - pam
+  - name: notauser
+    uid: 1002
+    gid: 1002
+    auths:
+      - pam  
+  - name: tommy
+    uid: 1001
+    gid: 1001
+    auths:
       - pam
   - name: user1
     uid: 9002
     gid: 9002
+    accountStatus: inactive
     auths:
       - "sha256:0a041b9462caa4a31bac3567e0b6e6fd9100787db2ab433d96f6d178cabfce90" # user1
+  - name: admin
+    uid: 9003
+    gid: 9001
+    auths:
+      - "sha256:5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8" # password

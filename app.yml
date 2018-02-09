@@ -3,7 +3,7 @@ backend: yaml
 
 servers:
   ldap:
-    Bind: "localhost:8389"
+    Bind: "0.0.0.0:8389"
 
 backends:
   yaml:
