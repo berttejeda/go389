@@ -8,7 +8,6 @@ import (
 )
 
 func PAMAuth(serviceName, userName, passwd string) error {
-	log.Info("serviceName = ", serviceName)
 	t, err := pam.StartFunc(serviceName, userName, func(s pam.Style, msg string) (string, error) {
 		switch s {
 		case pam.PromptEchoOff:
