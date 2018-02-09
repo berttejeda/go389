@@ -3,10 +3,10 @@ package cmd
 import (
 	"path/filepath"
 
-	backend "github.com/kernel164/go389/backend"
-	cfg "github.com/kernel164/go389/cfg"
-	log "github.com/kernel164/go389/log"
-	server "github.com/kernel164/go389/server"
+	backend "github.com/berttejeda/go389/backend"
+	cfg "github.com/berttejeda/go389/cfg"
+	log "github.com/berttejeda/go389/log"
+	server "github.com/berttejeda/go389/server"
 	"gopkg.in/codegangsta/cli.v1"
 )
 

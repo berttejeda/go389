@@ -3,7 +3,7 @@
 package ini
 
 import (
-	model "github.com/kernel164/go389/model"
+	model "github.com/berttejeda/go389/model"
 	"gopkg.in/ini.v1"
 )
 

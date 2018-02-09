@@ -1,8 +1,8 @@
 package main
 
 import (
-	cmd "github.com/kernel164/go389/cmd"
-	model "github.com/kernel164/go389/model"
+	cmd "github.com/berttejeda/go389/cmd"
+	model "github.com/berttejeda/go389/model"
 	"gopkg.in/codegangsta/cli.v1"
 	"os"
 )

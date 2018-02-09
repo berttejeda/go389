@@ -9,6 +9,8 @@ RUN apt-get update && \
 
 COPY . .
 
+RUN go get github.com/berttejeda/go389
+
 RUN go get gopkg.in/yaml.v1
  
 RUN go get github.com/msteinert/pam
