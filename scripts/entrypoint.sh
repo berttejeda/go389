@@ -6,7 +6,7 @@ set -o nounset
 set -o errexit
 
 
-if ! [[ -f db.yml ]];then
+if ! [[ -f conf/db.yml ]];then
 	echo "Warning: Didn't find a users db (db.yml)"
 fi
 
