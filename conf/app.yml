@@ -7,7 +7,7 @@ servers:
 
 backends:
   yaml:
-    Path: db.yml
+    Path: conf/db.yml
     BaseDN: "dc=example,dc=com"
 
 auths:
