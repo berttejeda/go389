@@ -105,11 +105,10 @@ The provided configuration references a yaml backend, a flat file named `db.yaml
 
 You can configure new users fairly easily.
 
-To generate new sha256 passwords, you can utilize a free web service or do so via your choice of programmatic approach, e.g. python, go, bash, etc
+To generate new sha256-hashed passwords, you can simply call go389 with the hash parameter,
+as with:
 
-Here's the website I used:
-
-[http://passwordsgenerator.net/sha256-hash-generator/](http://passwordsgenerator.net/sha256-hash-generator/)
+`./go389 hash -a sha256 -v MySuperStrongPassword`
 
 ### References
 - https://github.com/nmcclain/ldap
