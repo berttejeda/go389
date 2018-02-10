@@ -35,11 +35,11 @@ WORKDIR /root/
 
 COPY --from=builder /go/src/github.com/berttejeda/go389/scripts/entrypoint.sh .
 
-RUN chmod +x entrypoint.sh
+RUN chmod +x entrypoint.sh && mkdir conf
 
-COPY --from=builder /go/src/github.com/berttejeda/go389/conf/app.yml .
+COPY --from=builder /go/src/github.com/berttejeda/go389/conf/app.yml ./conf
 
-COPY --from=builder /go/src/github.com/berttejeda/go389/conf/db.yml .
+COPY --from=builder /go/src/github.com/berttejeda/go389/conf/db.yml ./conf
 
 COPY --from=builder /go/src/github.com/berttejeda/go389/go389 .
 

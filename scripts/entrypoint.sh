@@ -11,7 +11,7 @@ if ! [[ -f db.yml ]];then
 fi
 
 if [[ -f app.yml ]];then
-	./go389 server -c app.yml
+	./go389 server -c conf/app.yml
 else
-	./go389 server -c "${APP_CONFIG}"
+	./go389 server -c "${APP_CONFIG_PATH}"
 fi
