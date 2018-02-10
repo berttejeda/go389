@@ -29,12 +29,18 @@ RUN CGO_ENABLED=0 GOOS=linux go build -tags "yaml	 netgo" -a -installsuffix cgo
 
 FROM alpine:edge 
 
+RUN apk add --no-cache bash
+
 WORKDIR /root/
 
-COPY --from=builder /go/src/github.com/berttejeda/go389/app.yml .
+COPY --from=builder /go/src/github.com/berttejeda/go389/scripts/entrypoint.sh .
 
-COPY --from=builder /go/src/github.com/berttejeda/go389/db.yml .
+RUN chmod +x entrypoint.sh
+
+COPY --from=builder /go/src/github.com/berttejeda/go389/conf/app.yml .
+
+COPY --from=builder /go/src/github.com/berttejeda/go389/conf/db.yml .
 
 COPY --from=builder /go/src/github.com/berttejeda/go389/go389 .
 
-CMD ["./go389", "server", "-c", "app.yml"]
+CMD ["./entrypoint.sh"]
