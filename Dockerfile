@@ -1,6 +1,6 @@
 FROM golang:1.9 as builder
 
-WORKDIR /go/src/github.com/berttejeda/kernel164/go389
+WORKDIR /go/src/github.com/berttejeda/go389
 
 # Prerequisites
 RUN apt-get update && \
@@ -9,20 +9,32 @@ RUN apt-get update && \
 
 COPY . .
 
-RUN go get github.com/berttejeda/go389
+RUN git config --global http.sslVerify false
 
-RUN go get gopkg.in/yaml.v1
+ENV GOROOT /usr/local/go
+ENV GOPATH /go
+ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
+
+RUN mkdir -p ${GOPATH}/src ${GOPATH}/bin
+
+RUN go get -d -v -insecure
+
+RUN go get -insecure github.com/berttejeda/go389
+
+RUN go get -insecure gopkg.in/yaml.v1
  
-RUN go get github.com/msteinert/pam
+RUN go get -insecure github.com/msteinert/pam
 
-RUN CGO_ENABLED=0 GOOS=linux go build -i -tags "yaml pam" -a -installsuffix cgo -o app .
+RUN CGO_ENABLED=0 GOOS=linux go build -tags "yaml	 netgo" -a -installsuffix cgo
 
-FROM alpine:latest  
-
-RUN apk --no-cache add ca-certificates
+FROM alpine:edge 
 
 WORKDIR /root/
 
-COPY --from=builder /go/src/github.com/berttejeda/kernel164/go389/app .
+COPY --from=builder /go/src/github.com/berttejeda/go389/app.yml .
 
-CMD ["./app"]
+COPY --from=builder /go/src/github.com/berttejeda/go389/db.yml .
+
+COPY --from=builder /go/src/github.com/berttejeda/go389/go389 .
+
+CMD ["./go389", "server", "-c", "app.yml"]
