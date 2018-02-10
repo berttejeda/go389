@@ -10,7 +10,7 @@ if ! [[ -f db.yml ]];then
 	echo "Warning: Didn't find a users db (db.yml)"
 fi
 
-if [[ -f app.yml ]];then
+if [[ -f conf/app.yml ]];then
 	./go389 server -c conf/app.yml
 else
 	./go389 server -c "${APP_CONFIG_PATH}"
